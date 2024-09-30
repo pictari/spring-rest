@@ -10,7 +10,7 @@ services:
     volumes:
       - './:/server'
     stdin_open: true
-    command: 'java -jar ./build/libs/SpringBootTest-1.0-SNAPSHOT.jar'
+    command: 'java -jar ./build/libs/spring-rest-1.0-SNAPSHOT.jar'
     ports:
       - '8080:8080'
 networks:
