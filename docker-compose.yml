@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: '.'
+      target: 'rest-api'
+    networks:
+      - 'standard'
+    working_dir: '/server'
+    volumes:
+      - './:/server'
+    stdin_open: true
+    command: 'java -jar ./build/libs/SpringBootTest-1.0-SNAPSHOT.jar'
+    ports:
+      - '8080:8080'
+networks:
+  standard:
+    name: network-standard
