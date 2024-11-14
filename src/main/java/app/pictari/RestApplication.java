@@ -1,9 +1,9 @@
 package app.pictari;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import app.pictari.aws.dynamodb.DynamoRequestHandler;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,12 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class RestApplication {
 
+    DynamoRequestHandler dynamoHandler = new DynamoRequestHandler();
     @RequestMapping("/")
     public String home() {
         return "[insert something funny here]";
     }
 
+    @RequestMapping("/rooms")
+    public String roomListEndpoint() { return dynamoHandler.getAllRooms("sample-data");}
+
     public static void main(String[] args) {
-        SpringApplication.run(RestApplication.class, args);
+        SpringApplication spring = new SpringApplication(RestApplication.class);
+        spring.setWebApplicationType(WebApplicationType.SERVLET);
+        spring.run(args);
     }
 }
